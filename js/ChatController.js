@@ -13,14 +13,11 @@ ChatController.prototype = {
 
   onFormSubmit: function(event, form) {
     event.preventDefault();
-    this.addMessage({
-      name: this.nameField.val(),
-      body: this.bodyField.val()
-    });
+    var message = new ChatMessage(this.nameField.val(), this.bodyField.val());
+    this.addMessage(message);
   },
 
   addMessage: function(message) {
-    var li = $('<li>').html("<strong>" + message.name + ":</strong> " + message.body);
-    this.messageList.append(li);
+    this.messageList.append(ChatView.renderMessage(message));
   }
 }
