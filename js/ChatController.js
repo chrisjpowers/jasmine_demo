@@ -4,20 +4,33 @@ var ChatController = function(attributes) {
 
 ChatController.prototype = {
   init: function(attributes) {
-    this.form = attributes.form;
+    this.form        = attributes.form;
     this.messageList = attributes.messageList;
-    this.nameField = attributes.nameField;
-    this.bodyField = attributes.bodyField;
+    this.nameField   = attributes.nameField;
+    this.bodyField   = attributes.bodyField;
     this.form.submit($.proxy(this.onFormSubmit, this));
   },
 
   onFormSubmit: function(event, form) {
     event.preventDefault();
     var message = new ChatMessage(this.nameField.val(), this.bodyField.val());
-    this.addMessage(message);
+    if(message.isValid()) {
+      this.addMessage(message);
+      this.resetFields();
+    } else {
+      this.displayError(message.errorMessage());
+    }
   },
 
   addMessage: function(message) {
-    this.messageList.append(ChatView.renderMessage(message));
+    this.messageList.prepend(ChatView.renderMessage(message));
+  },
+
+  displayError: function(str) {
+    alert(str);
+  },
+
+  resetFields: function() {
+    this.bodyField.val('');
   }
-}
+};
