@@ -12,6 +12,15 @@ describe("Features", function() {
   });
 
   describe("filling out the message form", function() {
+    describe("with filthy language", function() {
+      it("should not post a message if the body includes 'drat'", function() {
+        $("#message_name").val("Chris");
+        $("#message_body").val("Hello drat");
+        $("#message_form").submit();
+        expect($("#messages li").length).toEqual(0);
+      });
+    });
+
     describe("with valid data", function() {
       beforeEach(function() {
         $("#message_name").val("Chris");

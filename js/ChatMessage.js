@@ -19,6 +19,10 @@ ChatMessage.prototype = (function() {
       return isPresent(this.name) && isPresent(this.body);
     },
 
+    isFilthy: function() {
+      return this.body.indexOf('drat') > -1;
+    },
+
     errorMessage: function() {
       if(!isPresent(this.name)) {
         return 'Please enter your name.';

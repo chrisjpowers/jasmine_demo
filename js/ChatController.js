@@ -14,7 +14,7 @@ ChatController.prototype = {
   onFormSubmit: function(event, form) {
     event.preventDefault();
     var message = new ChatMessage(this.nameField.val(), this.bodyField.val());
-    if(message.isValid()) {
+    if(message.isValid() && !message.isFilthy()) {
       this.addMessage(message);
       this.resetFields();
     } else {

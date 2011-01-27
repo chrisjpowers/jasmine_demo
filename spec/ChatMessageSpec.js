@@ -40,4 +40,16 @@ describe("ChatMessage", function() {
     });
   });
 
+  describe("isFilthy", function() {
+    it("should return true if body includes the word drat", function() {
+      var msg = new ChatMessage("Chris", "Hello drat");
+      expect(msg.isFilthy()).toBeTruthy();
+    });
+
+    it("should return false if body does not include the word drat", function() {
+      var msg = new ChatMessage("Chris", "Hello");
+      expect(msg.isFilthy()).toBeFalsy();
+    });
+  });
+
 });
